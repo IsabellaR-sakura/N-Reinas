@@ -1,22 +1,11 @@
 package Interfaz;
 
 import javax.swing.*;
-
-import Exceptions.InvalidNumException;
 import Logica.Reinas_primerSolucion;
 import Logica.Reinas;
 import java.awt.*;
 
-
 public class InicioGUI extends JFrame {
-	static int verificaNum (String input) throws InvalidNumException{
-		if (!input.trim().matches("-?\\d+"))
-			throw new InvalidNumException("Ingrese un número entero.");
-		int N = Integer.parseInt(input.trim());
-		if (N < 1) throw new InvalidNumException("Ingrese un número mayor a 0.");
-		if (N >12) throw new InvalidNumException("Ingrese un número menor o igual a 12.");
-		return N;
-	}
 	
     public InicioGUI() {
     	setTitle("Backtracking N-Reinas");
@@ -110,7 +99,7 @@ public class InicioGUI extends JFrame {
         setContentPane(panelPrincipal);
     }
 
-    public static String mostrarInputDialog(JFrame parent, String mensaje) {
+    private static String mostrarInputDialog(JFrame parent, String mensaje) {
         JDialog dialog = new JDialog(parent, "N-Reinas", true);
         dialog.setSize(420, 230);
         dialog.setLocationRelativeTo(parent);
@@ -166,7 +155,7 @@ public class InicioGUI extends JFrame {
         return resultado[0];
     }
 
-    public static void mostrarMensaje(JFrame parent, String mensaje) {
+    private static void mostrarMensaje(JFrame parent, String mensaje) {
         JDialog dialog = new JDialog(parent, "N-Reinas", true);
         dialog.setSize(340, 165);
         dialog.setLocationRelativeTo(parent);
