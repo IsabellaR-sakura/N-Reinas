@@ -1,11 +1,22 @@
 package Interfaz;
 
 import javax.swing.*;
+
+import Exceptions.InvalidNumException;
 import Logica.Reinas_primerSolucion;
 import Logica.Reinas;
 import java.awt.*;
 
 public class InicioGUI extends JFrame {
+	
+	private static int verificaNum (String input) throws InvalidNumException{
+		if (!input.trim().matches("-?\\d+"))
+			throw new InvalidNumException("Ingrese un número entero.");
+		int N = Integer.parseInt(input.trim());
+		if (N < 1) throw new InvalidNumException("Ingrese un número mayor a 0.");
+		if (N >12) throw new InvalidNumException("Ingrese un número menor o igual a 12.");
+		return N;
+	}
 	
     public InicioGUI() {
     	setTitle("Backtracking N-Reinas");
@@ -35,10 +46,9 @@ public class InicioGUI extends JFrame {
         JButton btnUnaSolucion = crearBoton("Ver Una Solución", new Color(181, 136, 99));
         btnUnaSolucion.addActionListener(e -> {
             String input = mostrarInputDialog(this, "Ingrese el valor de N:");
-            if (input == null || input.trim().isEmpty()) return;
+            if (input == null) return;
             try {
-                int N = Integer.parseInt(input.trim());
-                if (N < 1) throw new NumberFormatException();
+            	int N = verificaNum(input);
 
                 // Usamos OchoReinas para encontrar una sola solución
                 Reinas_primerSolucion r = new Reinas_primerSolucion(N);
@@ -55,8 +65,8 @@ public class InicioGUI extends JFrame {
                 ventana.setVisible(true);
                 setVisible(false);
 
-            } catch (NumberFormatException ex) {
-                mostrarMensaje(this, "Ingrese un número válido mayor a 0.");
+            }catch (InvalidNumException ex) {
+                mostrarMensaje(this, ex.getMessage());
             }
         });
 
@@ -64,10 +74,9 @@ public class InicioGUI extends JFrame {
         JButton btnTodasSoluciones = crearBoton("Ver Todas las Soluciones", new Color(120, 90, 60));
         btnTodasSoluciones.addActionListener(e -> {
             String input = mostrarInputDialog(this, "Ingrese el valor de N:");
-            if (input == null || input.trim().isEmpty()) return;
+            if (input == null) return;
             try {
-                int N = Integer.parseInt(input.trim());
-                if (N < 1) throw new NumberFormatException();
+            	int N = verificaNum(input);
 
                 // Usamos Reinas para encontrar todas las soluciones
                 Reinas r = new Reinas(N);
@@ -82,8 +91,8 @@ public class InicioGUI extends JFrame {
                 ventana.setVisible(true);
                 setVisible(false);
 
-            } catch (NumberFormatException ex) {
-                mostrarMensaje(this, "Ingrese un número válido mayor a 0.");
+            } catch (InvalidNumException ex) {
+                mostrarMensaje(this, ex.getMessage());
             }
         });
 
