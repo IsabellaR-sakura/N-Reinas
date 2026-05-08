@@ -35,12 +35,10 @@ public class PanelTablero extends JPanel {
         super.paintComponent(g);
         int tamaño = Math.min(getWidth(), getHeight());
         int casilla = tamaño / N;
-        Color colorClaro  = new Color(240, 217, 181);
-        Color colorOscuro = new Color(181, 136, 99);
 
         for (int fila = 0; fila < N; fila++) {
             for (int col = 0; col < N; col++) {
-                g.setColor((fila + col) % 2 == 0 ? colorClaro : colorOscuro);
+                g.setColor((fila + col) % 2 == 0 ? Utilidades.txt : Utilidades.prim);
                 g.fillRect(col * casilla, fila * casilla, casilla, casilla);
 
                 if (solucion != null && solucion[fila] == col) {
