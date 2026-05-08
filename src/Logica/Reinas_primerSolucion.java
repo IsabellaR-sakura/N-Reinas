@@ -1,7 +1,7 @@
 package Logica;
 import java.util.Arrays;
 
-public class OchoReinas {
+public class Reinas_primerSolucion {
 	/*
 	 * En este arreglo se guardan las reinas posicionadas de la siguiente manera
 	 * Indice -> Fila
@@ -15,7 +15,7 @@ public class OchoReinas {
     private int[] solucion;
     private boolean encontrado;
 
-    public OchoReinas(int n) {
+    public Reinas_primerSolucion(int n) {
         this.N = n;
         this.reinas = new int[N];
         this.solucion = null;
