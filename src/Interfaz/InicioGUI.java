@@ -1,14 +1,25 @@
 package Interfaz;
 
 import javax.swing.*;
-import Logica.OchoReinas;
+
+import Exceptions.InvalidNumException;
+import Logica.Reinas_primerSolucion;
 import Logica.Reinas;
 import java.awt.*;
 
-public class InicioGUI extends JFrame {
 
+public class InicioGUI extends JFrame {
+	static int verificaNum (String input) throws InvalidNumException{
+		if (!input.trim().matches("-?\\d+"))
+			throw new InvalidNumException("Ingrese un número entero.");
+		int N = Integer.parseInt(input.trim());
+		if (N < 1) throw new InvalidNumException("Ingrese un número mayor a 0.");
+		if (N >12) throw new InvalidNumException("Ingrese un número menor o igual a 12.");
+		return N;
+	}
+	
     public InicioGUI() {
-        setTitle("Backtracking N-Reinas");
+    	setTitle("Backtracking N-Reinas");
         setSize(500, 380);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -31,7 +42,7 @@ public class InicioGUI extends JFrame {
         panelTitulos.add(titulo);
         panelTitulos.add(subtitulo);
 
-        // ── Botón: Ver Una Solución ──
+        //Botón: Ver Una Solución
         JButton btnUnaSolucion = crearBoton("Ver Una Solución", new Color(181, 136, 99));
         btnUnaSolucion.addActionListener(e -> {
             String input = mostrarInputDialog(this, "Ingrese el valor de N:");
@@ -41,7 +52,7 @@ public class InicioGUI extends JFrame {
                 if (N < 1) throw new NumberFormatException();
 
                 // Usamos OchoReinas para encontrar una sola solución
-                OchoReinas r = new OchoReinas(N);
+                Reinas_primerSolucion r = new Reinas_primerSolucion(N);
                 r.solucionar(0);
 
                 if (r.getSolucion() == null) {
@@ -60,7 +71,7 @@ public class InicioGUI extends JFrame {
             }
         });
 
-        // ── Botón: Ver Todas las Soluciones ──
+        //Botón: Ver Todas las Soluciones
         JButton btnTodasSoluciones = crearBoton("Ver Todas las Soluciones", new Color(120, 90, 60));
         btnTodasSoluciones.addActionListener(e -> {
             String input = mostrarInputDialog(this, "Ingrese el valor de N:");
@@ -87,7 +98,7 @@ public class InicioGUI extends JFrame {
             }
         });
 
-        // ── Panel de botones (apilados verticalmente) ──
+        //Panel de botones (apilados verticalmente)
         JPanel panelBotones = new JPanel(new GridLayout(2, 1, 0, 12));
         panelBotones.setOpaque(false);
         panelBotones.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
