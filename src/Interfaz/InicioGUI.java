@@ -19,23 +19,23 @@ public class InicioGUI extends JFrame {
 	}
 	
     public InicioGUI() {
-    	setTitle("Backtracking N-Reinas");
+        setTitle("Backtracking N-Reinas");
         setSize(500, 380);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
 
         JPanel panelPrincipal = new JPanel(new BorderLayout());
-        panelPrincipal.setBackground(new Color(30, 30, 30));
+        panelPrincipal.setBackground(Utilidades.bg);
         panelPrincipal.setBorder(BorderFactory.createEmptyBorder(35, 50, 30, 50));
 
         JLabel titulo = new JLabel("♛  N-Reinas", SwingConstants.CENTER);
         titulo.setFont(new Font("Serif", Font.BOLD, 42));
-        titulo.setForeground(new Color(240, 217, 181));
+        titulo.setForeground(Utilidades.txt);
 
         JLabel subtitulo = new JLabel("Backtracking", SwingConstants.CENTER);
         subtitulo.setFont(new Font("Arial", Font.PLAIN, 14));
-        subtitulo.setForeground(new Color(181, 136, 99));
+        subtitulo.setForeground(Utilidades.prim);
 
         JPanel panelTitulos = new JPanel(new GridLayout(2, 1, 0, 8));
         panelTitulos.setOpaque(false);
@@ -43,14 +43,14 @@ public class InicioGUI extends JFrame {
         panelTitulos.add(subtitulo);
 
         //Botón: Ver Una Solución
-        JButton btnUnaSolucion = Utilidades.crearBoton("Ver Una Solución", new Color(181, 136, 99));
+        JButton btnUnaSolucion = Utilidades.crearBoton("Ver Una Solución", Utilidades.prim);
         btnUnaSolucion.addActionListener(e -> {
             String input = mostrarInputDialog(this, "Ingrese el valor de N:");
             if (input == null) return;
             try {
-            	int N = verificaNum(input);
+                int N = verificaNum(input);
 
-                // encontrar una sola solución
+                //una sola solución
                 Reinas_primerSolucion r = new Reinas_primerSolucion(N);
                 r.solucionar(0);
 
@@ -65,20 +65,20 @@ public class InicioGUI extends JFrame {
                 ventana.setVisible(true);
                 setVisible(false);
 
-            }catch (InvalidNumException ex) {
+            } catch (InvalidNumException ex) {
                 mostrarMensaje(this, ex.getMessage());
             }
         });
 
         //Botón: Ver Todas las Soluciones
-        JButton btnTodasSoluciones = Utilidades.crearBoton("Ver Todas las Soluciones", new Color(120, 90, 60));
+        JButton btnTodasSoluciones = Utilidades.crearBoton("Ver Todas las Soluciones", Utilidades.prim.darker());
         btnTodasSoluciones.addActionListener(e -> {
             String input = mostrarInputDialog(this, "Ingrese el valor de N:");
             if (input == null) return;
             try {
-            	int N = verificaNum(input);
+                int N = verificaNum(input);
 
-                //para encontrar todas las soluciones
+                // Usamos Reinas para encontrar todas las soluciones
                 Reinas r = new Reinas(N);
                 r.solucionar(0);
 
@@ -91,7 +91,7 @@ public class InicioGUI extends JFrame {
                 ventana.setVisible(true);
                 setVisible(false);
 
-            } catch (InvalidNumException ex) {
+            }catch (InvalidNumException ex) {
                 mostrarMensaje(this, ex.getMessage());
             }
         });
@@ -103,8 +103,8 @@ public class InicioGUI extends JFrame {
         panelBotones.add(btnUnaSolucion);
         panelBotones.add(btnTodasSoluciones);
 
-        panelPrincipal.add(panelTitulos,BorderLayout.CENTER);
-        panelPrincipal.add(panelBotones,BorderLayout.SOUTH);
+        panelPrincipal.add(panelTitulos,  BorderLayout.CENTER);
+        panelPrincipal.add(panelBotones,  BorderLayout.SOUTH);
         setContentPane(panelPrincipal);
     }
 
@@ -115,20 +115,20 @@ public class InicioGUI extends JFrame {
         dialog.setResizable(false);
 
         JPanel panel = new JPanel(new BorderLayout(0, 0));
-        panel.setBackground(new Color(30, 30, 30));
+        panel.setBackground(Utilidades.bg);
         panel.setBorder(BorderFactory.createEmptyBorder(28, 35, 22, 35));
 
         JLabel lbl = new JLabel(mensaje, SwingConstants.CENTER);
         lbl.setFont(new Font("Arial", Font.PLAIN, 15));
-        lbl.setForeground(new Color(240, 217, 181));
+        lbl.setForeground(Utilidades.txt);
 
         JTextField campo = new JTextField();
         campo.setFont(new Font("Arial", Font.BOLD, 22));
-        campo.setBackground(new Color(50, 50, 50));
+        campo.setBackground(Utilidades.bg.brighter());
         campo.setForeground(Color.WHITE);
         campo.setCaretColor(Color.WHITE);
         campo.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(new Color(181, 136, 99), 2),
+            BorderFactory.createLineBorder(Utilidades.prim, 2),
             BorderFactory.createEmptyBorder(8, 12, 8, 12)
         ));
         campo.setHorizontalAlignment(JTextField.CENTER);
@@ -145,18 +145,18 @@ public class InicioGUI extends JFrame {
 
         String[] resultado = {null};
 
-        JButton btnOk = Utilidades.crearBoton("Aceptar",  new Color(181, 136, 99));
-        JButton btnCancelar= Utilidades.crearBoton("Cancelar", new Color(80, 80, 80));
+        JButton btnOk       = Utilidades.crearBoton("Aceptar",  Utilidades.prim);
+        JButton btnCancelar = Utilidades.crearBoton("Cancelar", Utilidades.bg.brighter().brighter());
 
-        btnOk.addActionListener(e -> { resultado[0] = campo.getText(); dialog.dispose(); });
+        btnOk.addActionListener(e      -> { resultado[0] = campo.getText(); dialog.dispose(); });
         btnCancelar.addActionListener(e -> dialog.dispose());
-        campo.addActionListener(e -> { resultado[0] = campo.getText(); dialog.dispose(); });
+        campo.addActionListener(e      -> { resultado[0] = campo.getText(); dialog.dispose(); });
 
         panelBotones.add(btnOk);
         panelBotones.add(btnCancelar);
 
-        panel.add(lbl, BorderLayout.NORTH);
-        panel.add(panelCampo, BorderLayout.CENTER);
+        panel.add(lbl,          BorderLayout.NORTH);
+        panel.add(panelCampo,   BorderLayout.CENTER);
         panel.add(panelBotones, BorderLayout.SOUTH);
 
         dialog.setContentPane(panel);
@@ -171,26 +171,28 @@ public class InicioGUI extends JFrame {
         dialog.setResizable(false);
 
         JPanel panel = new JPanel(new BorderLayout());
-        panel.setBackground(new Color(30, 30, 30));
+        panel.setBackground(Utilidades.bg);
         panel.setBorder(BorderFactory.createEmptyBorder(28, 30, 22, 30));
 
         JLabel lbl = new JLabel(mensaje, SwingConstants.CENTER);
         lbl.setFont(new Font("Arial", Font.PLAIN, 14));
-        lbl.setForeground(new Color(240, 217, 181));
+        lbl.setForeground(Utilidades.txt);
 
-        JButton btnOk = Utilidades.crearBoton("Aceptar", new Color(181, 136, 99));
+        JButton btnOk = Utilidades.crearBoton("Aceptar", Utilidades.prim);
         btnOk.addActionListener(e -> dialog.dispose());
 
         JPanel panelBoton = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelBoton.setOpaque(false);
         panelBoton.add(btnOk);
 
-        panel.add(lbl, BorderLayout.CENTER);
-        panel.add(panelBoton,BorderLayout.SOUTH);
+        panel.add(lbl,        BorderLayout.CENTER);
+        panel.add(panelBoton, BorderLayout.SOUTH);
 
         dialog.setContentPane(panel);
         dialog.setVisible(true);
     }
+
+    
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new InicioGUI().setVisible(true));

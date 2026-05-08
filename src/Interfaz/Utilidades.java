@@ -11,6 +11,11 @@ import java.awt.RenderingHints;
 import javax.swing.JButton;
 
 public class Utilidades {
+	public static final Color bg = new Color(30, 30, 30);
+	public static final Color txt = new Color(240, 217, 181);
+	public static final Color alt = new Color(200, 200, 200);
+	public static final Color prim = new Color(181, 136, 99);
+	
 	public static JButton crearBoton(String texto, Color colorFondo) {
         JButton btn = new JButton(texto) {
             @Override
