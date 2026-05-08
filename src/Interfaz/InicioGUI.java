@@ -43,14 +43,14 @@ public class InicioGUI extends JFrame {
         panelTitulos.add(subtitulo);
 
         //Botón: Ver Una Solución
-        JButton btnUnaSolucion = crearBoton("Ver Una Solución", new Color(181, 136, 99));
+        JButton btnUnaSolucion = Utilidades.crearBoton("Ver Una Solución", new Color(181, 136, 99));
         btnUnaSolucion.addActionListener(e -> {
             String input = mostrarInputDialog(this, "Ingrese el valor de N:");
             if (input == null) return;
             try {
             	int N = verificaNum(input);
 
-                // Usamos OchoReinas para encontrar una sola solución
+                // encontrar una sola solución
                 Reinas_primerSolucion r = new Reinas_primerSolucion(N);
                 r.solucionar(0);
 
@@ -71,14 +71,14 @@ public class InicioGUI extends JFrame {
         });
 
         //Botón: Ver Todas las Soluciones
-        JButton btnTodasSoluciones = crearBoton("Ver Todas las Soluciones", new Color(120, 90, 60));
+        JButton btnTodasSoluciones = Utilidades.crearBoton("Ver Todas las Soluciones", new Color(120, 90, 60));
         btnTodasSoluciones.addActionListener(e -> {
             String input = mostrarInputDialog(this, "Ingrese el valor de N:");
             if (input == null) return;
             try {
             	int N = verificaNum(input);
 
-                // Usamos Reinas para encontrar todas las soluciones
+                //para encontrar todas las soluciones
                 Reinas r = new Reinas(N);
                 r.solucionar(0);
 
@@ -103,8 +103,8 @@ public class InicioGUI extends JFrame {
         panelBotones.add(btnUnaSolucion);
         panelBotones.add(btnTodasSoluciones);
 
-        panelPrincipal.add(panelTitulos,  BorderLayout.CENTER);
-        panelPrincipal.add(panelBotones,  BorderLayout.SOUTH);
+        panelPrincipal.add(panelTitulos,BorderLayout.CENTER);
+        panelPrincipal.add(panelBotones,BorderLayout.SOUTH);
         setContentPane(panelPrincipal);
     }
 
@@ -145,18 +145,18 @@ public class InicioGUI extends JFrame {
 
         String[] resultado = {null};
 
-        JButton btnOk       = crearBoton("Aceptar",  new Color(181, 136, 99));
-        JButton btnCancelar = crearBoton("Cancelar", new Color(80, 80, 80));
+        JButton btnOk = Utilidades.crearBoton("Aceptar",  new Color(181, 136, 99));
+        JButton btnCancelar= Utilidades.crearBoton("Cancelar", new Color(80, 80, 80));
 
-        btnOk.addActionListener(e      -> { resultado[0] = campo.getText(); dialog.dispose(); });
+        btnOk.addActionListener(e -> { resultado[0] = campo.getText(); dialog.dispose(); });
         btnCancelar.addActionListener(e -> dialog.dispose());
-        campo.addActionListener(e      -> { resultado[0] = campo.getText(); dialog.dispose(); });
+        campo.addActionListener(e -> { resultado[0] = campo.getText(); dialog.dispose(); });
 
         panelBotones.add(btnOk);
         panelBotones.add(btnCancelar);
 
-        panel.add(lbl,          BorderLayout.NORTH);
-        panel.add(panelCampo,   BorderLayout.CENTER);
+        panel.add(lbl, BorderLayout.NORTH);
+        panel.add(panelCampo, BorderLayout.CENTER);
         panel.add(panelBotones, BorderLayout.SOUTH);
 
         dialog.setContentPane(panel);
@@ -178,44 +178,18 @@ public class InicioGUI extends JFrame {
         lbl.setFont(new Font("Arial", Font.PLAIN, 14));
         lbl.setForeground(new Color(240, 217, 181));
 
-        JButton btnOk = crearBoton("Aceptar", new Color(181, 136, 99));
+        JButton btnOk = Utilidades.crearBoton("Aceptar", new Color(181, 136, 99));
         btnOk.addActionListener(e -> dialog.dispose());
 
         JPanel panelBoton = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelBoton.setOpaque(false);
         panelBoton.add(btnOk);
 
-        panel.add(lbl,        BorderLayout.CENTER);
-        panel.add(panelBoton, BorderLayout.SOUTH);
+        panel.add(lbl, BorderLayout.CENTER);
+        panel.add(panelBoton,BorderLayout.SOUTH);
 
         dialog.setContentPane(panel);
         dialog.setVisible(true);
-    }
-
-    public static JButton crearBoton(String texto, Color colorFondo) {
-        JButton btn = new JButton(texto) {
-            @Override
-            protected void paintComponent(Graphics g) {
-                Graphics2D g2 = (Graphics2D) g.create();
-                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                g2.setColor(getModel().isPressed()
-                        ? colorFondo.darker()
-                        : getModel().isRollover() ? colorFondo.brighter() : colorFondo);
-                g2.fillRoundRect(0, 0, getWidth(), getHeight(), 18, 18);
-                g2.dispose();
-                super.paintComponent(g);
-            }
-        };
-        btn.setFont(new Font("Arial", Font.BOLD, 14));
-        btn.setForeground(Color.WHITE);
-        btn.setBackground(colorFondo);
-        btn.setFocusPainted(false);
-        btn.setBorderPainted(false);
-        btn.setContentAreaFilled(false);
-        btn.setOpaque(false);
-        btn.setPreferredSize(new Dimension(200, 46));
-        btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        return btn;
     }
 
     public static void main(String[] args) {

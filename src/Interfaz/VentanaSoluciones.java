@@ -6,7 +6,7 @@ import java.awt.event.*;
 
 public class VentanaSoluciones extends JFrame {
 
-    private int[][] soluciones;  // <-- cambio
+    private int[][] soluciones;
     private int indice = 0;
     private PanelTablero tablero;
     private JLabel lblInfo;
@@ -15,7 +15,7 @@ public class VentanaSoluciones extends JFrame {
     private JButton btnSiguiente;
     private JDialog dialogSelector;
 
-    public VentanaSoluciones(int[][] soluciones, int N, JFrame ventanaInicio) {  // <-- cambio
+    public VentanaSoluciones(int[][] soluciones, int N, JFrame ventanaInicio) {
         this.soluciones = soluciones;
         this.ventanaInicio = ventanaInicio;
 
@@ -60,18 +60,18 @@ public class VentanaSoluciones extends JFrame {
         panelHeader.add(btnSelector, BorderLayout.WEST);
         panelHeader.add(lblInfo,     BorderLayout.CENTER);
 
-        // ── Tablero ──
+        // Tablero
         tablero = new PanelTablero(N);
         tablero.setBackground(new Color(30, 30, 30));
 
-        // ── Botones ──
+        //Botones
         JPanel panelBotones = new JPanel(new GridLayout(1, 3, 10, 0));
         panelBotones.setBackground(new Color(20, 20, 20));
         panelBotones.setBorder(BorderFactory.createEmptyBorder(10, 15, 12, 15));
 
-        JButton btnInicio = InicioGUI.crearBoton("⌂ Inicio",    new Color(80, 80, 80));
-        btnAnterior       = InicioGUI.crearBoton("← Anterior",  new Color(120, 90, 60));
-        btnSiguiente      = InicioGUI.crearBoton("Siguiente →", new Color(181, 136, 99));
+        JButton btnInicio = Utilidades.crearBoton("⌂ Inicio",    new Color(80, 80, 80));
+        btnAnterior       = Utilidades.crearBoton("← Anterior",  new Color(120, 90, 60));
+        btnSiguiente      = Utilidades.crearBoton("Siguiente →", new Color(181, 136, 99));
 
         btnInicio.addActionListener(e    -> { ventanaInicio.setVisible(true); dispose(); });
         btnAnterior.addActionListener(e  -> mostrarAnterior());
@@ -129,7 +129,7 @@ public class VentanaSoluciones extends JFrame {
         listaPanel.setLayout(new BoxLayout(listaPanel, BoxLayout.Y_AXIS));
         listaPanel.setBackground(new Color(25, 25, 25));
 
-        for (int i = 0; i < soluciones.length; i++) {  // <-- .length
+        for (int i = 0; i < soluciones.length; i++) {
             listaPanel.add(crearItemLista(i));
         }
 
@@ -138,7 +138,7 @@ public class VentanaSoluciones extends JFrame {
         scroll.getViewport().setBackground(new Color(25, 25, 25));
         scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
-        int altura = Math.min(soluciones.length * 38 + 10, 400);  // <-- .length
+        int altura = Math.min(soluciones.length * 38 + 10, 400);
         scroll.setPreferredSize(new Dimension(200, altura));
 
         panel.add(scroll, BorderLayout.CENTER);
@@ -205,8 +205,8 @@ public class VentanaSoluciones extends JFrame {
     }
 
     private void mostrarSolucion() {
-        tablero.setSolucion(soluciones[indice]);          // <-- [indice]
-        lblInfo.setText("Solución " + (indice + 1) + " de " + soluciones.length);  // <-- .length
+        tablero.setSolucion(soluciones[indice]);
+        lblInfo.setText("Solución " + (indice + 1) + " de " + soluciones.length);
     }
 
     private void mostrarAnterior() {
@@ -214,11 +214,11 @@ public class VentanaSoluciones extends JFrame {
     }
 
     private void mostrarSiguiente() {
-        if (indice < soluciones.length - 1) { indice++; mostrarSolucion(); actualizarBotones(); }  // <-- .length
+        if (indice < soluciones.length - 1) { indice++; mostrarSolucion(); actualizarBotones(); }
     }
 
     private void actualizarBotones() {
         btnAnterior.setEnabled(indice > 0);
-        btnSiguiente.setEnabled(indice < soluciones.length - 1);  // <-- .length
+        btnSiguiente.setEnabled(indice < soluciones.length - 1);
     }
 }
