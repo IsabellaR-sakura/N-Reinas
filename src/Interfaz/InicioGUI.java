@@ -52,7 +52,6 @@ public class InicioGUI extends JFrame {
 
                 //una sola solución
                 Reinas_primerSolucion r = new Reinas_primerSolucion(N);
-                r.solucionar(0);
 
                 if (r.getSolucion() == null) {
                     mostrarMensaje(this, "No hay solución para N=" + N);
@@ -80,7 +79,6 @@ public class InicioGUI extends JFrame {
 
                 // Usamos Reinas para encontrar todas las soluciones
                 Reinas r = new Reinas(N);
-                r.solucionar(0);
 
                 if (r.getSoluciones().length == 0) {
                     mostrarMensaje(this, "No hay soluciones para N=" + N);

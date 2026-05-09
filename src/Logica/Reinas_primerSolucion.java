@@ -24,6 +24,8 @@ public class Reinas_primerSolucion {
         for (int i = 0; i < N; i++) {
             reinas[i] = -1;
         }
+        
+        solucionar(0);
     }
 
     public int[] getSolucion() {
