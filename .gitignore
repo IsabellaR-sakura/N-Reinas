@@ -1,8 +1,0 @@
-# Compilados
-bin/
-
-# Eclipse
-.settings/
-
-# Logs
-*.log
