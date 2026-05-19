@@ -59,7 +59,7 @@ public class Reinas_primerSolucion {
 
         return !salir;
     }
-
+//O(f(n))? f(n) = 4+2n => O(n)
 	/*
 	 * Método recursivo de Backtracking
 	 * Buscamos soluciones recursivamente y hacemos
@@ -85,14 +85,16 @@ public class Reinas_primerSolucion {
 				reinas[fila] = i;
 				// Continuamos con la siguiente fila
 				solucionar(fila + 1);
+				
+				if (!encontrado) {
+					reinas[fila] = -1;
+				}
 			}
 			i++;
 		}
 		// Si nos salimos de la solución actual entonces hacemos backtracking
 		// Solo hacemos backtracking si todavía no encontramos la solución
-		if (!encontrado) {
-			reinas[fila] = -1;
-		}
+		
 	}
     
     

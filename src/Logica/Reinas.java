@@ -88,10 +88,12 @@ public class Reinas {
 				reinas[fila] = i;
 				//Continuamos con la siguiente fila
 				solucionar(fila + 1);
+				
+				reinas[fila] = -1;
 			}
 		}
 		//Si nos salimos de la solución actual entonces hacemos backtracking
-		reinas[fila] = -1;
+		
 	}
 }
 
